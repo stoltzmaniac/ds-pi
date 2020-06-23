@@ -1,19 +1,19 @@
 import time
 import RPi.GPIO as GPIO
-import Freenove_DHT as DHT
+import sensors.Freenove_DHT as DHT
 
 DHTPin = 11
-ledPinGreen = 38
+ledPinBlue = 38
 ledPinRed = 40
 
 def setup():
     GPIO.setmode(GPIO.BOARD)  # use Physical GPIO numbering
-    GPIO.setup(ledPinGreen, GPIO.OUT)  # set the ledPin to OUTPUT mode
+    GPIO.setup(ledPinBlue, GPIO.OUT)  # set the ledPin to OUTPUT mode
     GPIO.setup(ledPinRed, GPIO.OUT)  # set the ledPin to OUTPUT mode
-    GPIO.output(ledPinGreen, GPIO.LOW)  # make ledPin output LOW level
+    GPIO.output(ledPinBlue, GPIO.LOW)  # make ledPin output LOW level
     GPIO.output(ledPinRed, GPIO.LOW)  # make ledPin output LOW level
-    print(f"Green LED: {ledPinGreen}")
-    print(f"Red LED: {ledPinRed}")
+    print(f"Blue LED Pin: {ledPinBlue}")
+    print(f"Red LED Pin: {ledPinRed}")
 
 def loop():
     dht = DHT.DHT(DHTPin)
@@ -37,12 +37,12 @@ def loop():
             temperature = (9*dht.temperature/5) + 32
             if temperature >= 73:
                 GPIO.output(ledPinRed, GPIO.LOW)
-                GPIO.output(ledPinGreen, GPIO.HIGH)
+                GPIO.output(ledPinBlue, GPIO.HIGH)
             elif temperature < 73:
-                GPIO.output(ledPinGreen, GPIO.LOW)
+                GPIO.output(ledPinBlue, GPIO.LOW)
                 GPIO.output(ledPinRed, GPIO.HIGH)
             else:
-                GPIO.output(ledPinGreen, GPIO.LOW)
+                GPIO.output(ledPinBlue, GPIO.LOW)
                 GPIO.output(ledPinRed, GPIO.LOW)
                 
             print(f"Humidity: {humidity} \nTemperature: {temperature} \n")
