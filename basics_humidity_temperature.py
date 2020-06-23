@@ -2,6 +2,7 @@ import time
 import RPi.GPIO as GPIO
 import sensors.Freenove_DHT as DHT
 
+
 DHTPin = 11
 ledPinBlue = 38
 ledPinRed = 40
